@@ -29,7 +29,7 @@ target("f4se-no-console-spam")
     add_rules("commonlibf4.plugin", {
         name = "no-console-spam",
         author = "qudix",
-        description = "F4SE plugin template using CommonLibF4"
+        description = "BEGONE CONSOLE SPAM!"
     })
 
     -- add src files
