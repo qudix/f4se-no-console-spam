@@ -1,43 +1,29 @@
 struct Hook_TESConditionItem
 {
-    static bool IsTrue(RE::TESConditionItem* a_this, RE::ConditionCheckParams* a_params)
+    static bool IsTrue(RE::TESConditionItem* a_this, RE::ConditionCheckParams& a_params)
     {
         auto tls = RE::TLS::GetSingleton();
         tls->consoleMode = false;
 
-        return _IsTrue(a_this, a_params);
+        return _IsTrue01(a_this, a_params);
     }
 
-    static inline REL::Relocation<decltype(IsTrue)> _IsTrue;
-
-    static void Install()
-    {
-        REL::Relocation target1{ REL::ID(2207303) };
-        _IsTrue = target1.write_call<5, 0xED>(IsTrue);
-        target1.write_call<5, 0x169>(IsTrue);
-        REL::Relocation target2{ REL::ID(2211989) };
-        target2.write_call<5, 0xF0>(IsTrue);
-        target2.write_call<5, 0x129>(IsTrue);
-        REL::Relocation target3{ REL::ID(2211990) };
-        target3.write_call<5, 0xDB>(IsTrue);
-        target3.write_call<5, 0x112>(IsTrue);
-        REL::Relocation target4{ REL::ID(2211991) };
-        target4.write_call<5, 0xF3>(IsTrue);
-        target4.write_call<5, 0x13F>(IsTrue);
-        REL::Relocation target5{ REL::ID(2211996) };
-        target5.write_call<5, 0xCB>(IsTrue);
-        target5.write_call<5, 0x102>(IsTrue);
-        REL::Relocation target6{ REL::ID(2212008) };
-        target6.write_call<5, 0x21>(IsTrue);
-    }
+    static inline REL::Hook _IsTrue01{ "IsTrue01", REL::ID(2207303), 0x0ED, IsTrue };
+    static inline REL::Hook _IsTrue02{ "IsTrue02", REL::ID(2207303), 0x169, IsTrue };
+    static inline REL::Hook _IsTrue03{ "IsTrue03", REL::ID(2211989), 0x0F0, IsTrue };
+    static inline REL::Hook _IsTrue04{ "IsTrue04", REL::ID(2211989), 0x129, IsTrue };
+    static inline REL::Hook _IsTrue05{ "IsTrue05", REL::ID(2211990), 0x0DB, IsTrue };
+    static inline REL::Hook _IsTrue06{ "IsTrue06", REL::ID(2211990), 0x112, IsTrue };
+    static inline REL::Hook _IsTrue07{ "IsTrue07", REL::ID(2211991), 0x0F3, IsTrue };
+    static inline REL::Hook _IsTrue08{ "IsTrue08", REL::ID(2211991), 0x13F, IsTrue };
+    static inline REL::Hook _IsTrue09{ "IsTrue09", REL::ID(2211996), 0x0CB, IsTrue };
+    static inline REL::Hook _IsTrue10{ "IsTrue10", REL::ID(2211996), 0x102, IsTrue };
+    static inline REL::Hook _IsTrue11{ "IsTrue11", REL::ID(2212008), 0x021, IsTrue };
 };
 
-F4SEPluginLoad(const F4SE::LoadInterface* a_f4se)
+F4SE_PLUGIN_LOAD(const F4SE::LoadInterface* a_f4se)
 {
-	F4SE::Init(a_f4se);
-	F4SE::AllocTrampoline(14);
-
-	Hook_TESConditionItem::Install();
+    F4SE::Init(a_f4se, { .trampoline = true, .trampolineSize = 14 });
 
 	return true;
 }
