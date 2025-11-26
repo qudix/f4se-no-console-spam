@@ -3,7 +3,7 @@ set_xmakever("2.8.2")
 includes("lib/commonlibf4")
 
 set_project("f4se-no-console-spam")
-set_version("0.1.0")
+set_version("0.1.1")
 set_license("GPL-3.0")
 
 set_languages("c++23")
